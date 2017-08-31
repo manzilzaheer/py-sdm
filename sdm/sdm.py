@@ -1038,9 +1038,9 @@ class BaseSDM(sklearn.base.BaseEstimator):
         km = self.fit(X, y, sample_weight, divs, divs_cache, ret_km)
         yield km
 
-    def staged_predict(self, X):
+    def staged_predict(self, X, divs=None, km=None):
         for x in X:
-            yield self.predict(x)
+            yield self.predict(x, divs, km)
 
     def staged_predict_log_proba(self, X):
         raise NotImplementedError
