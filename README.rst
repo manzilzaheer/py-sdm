@@ -34,10 +34,10 @@ API alignment with D3M::
             raise NotImplementedError
             
         staged_fit(self, X, y, sample_weight=None, classes=None, **kwargs):
-            raise NotImplementedError
+            yield
   
-        staged_predict(self, X):
-            raise NotImplementedError
+        staged_predict(self, X, divs=None, km=None): # Divs and km extra
+            yield
             
         staged_predict_log_proba(self, X):
             raise NotImplementedError
