@@ -569,6 +569,9 @@ class BaseSDM(sklearn.base.BaseEstimator):
 
         if ret_km:
             return full_km
+        else:
+            return None
+        
     fit.__doc__ = _fit_docstr.format(y_doc="""
         y: a vector of class labels (depending on the subclass)
         """)
@@ -1030,11 +1033,14 @@ class BaseSDM(sklearn.base.BaseEstimator):
     def predict_log_proba(self, X):
         raise NotImplementedError
 
-    def staged_fit(self, X, y, sample_weight=None, classes=None, **kwargs):
-        raise NotImplementedError
+    def staged_fit(self, X, y, sample_weight=None, divs=None, divs_cache=None,
+            ret_km=False):
+        km = self.fit(X, y, sample_weight, divs, divs_cache, ret_km)
+        yield km
 
     def staged_predict(self, X):
-        raise NotImplementedError
+        for x in X:
+            yield self.predict(x)
 
     def staged_predict_log_proba(self, X):
         raise NotImplementedError
