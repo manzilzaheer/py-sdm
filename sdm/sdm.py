@@ -1026,6 +1026,24 @@ class BaseSDM(sklearn.base.BaseEstimator):
                 ret += (tune_info,)  # TODO: nicer format for tune_info
         return ret
         # TODO: nicer output arguments in general (namedtuple)
+        
+    def predict_log_proba(self, X):
+        raise NotImplementedError
+
+    def staged_fit(self, X, y, sample_weight=None, classes=None, **kwargs):
+        raise NotImplementedError
+
+    def staged_predict(self, X):
+        raise NotImplementedError
+
+    def staged_predict_log_proba(self, X):
+        raise NotImplementedError
+
+    def __getstate__(self):
+        raise NotImplementedError
+
+    def __setstate__(self, state):
+        raise NotImplementedError
 
 
 class BaseSDMClassifier(BaseSDM):
